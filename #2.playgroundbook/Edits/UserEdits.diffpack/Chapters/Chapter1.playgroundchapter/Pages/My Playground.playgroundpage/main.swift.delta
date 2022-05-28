@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>let closure = { // Armazenar uma função dentro de uma variável.
+    print("Isso é uma closure.")
+}
+closure()
+
+let closureParam = { (place: String) in 
+    print("Way to gooo!!! ... or \(place)")
+}
+closureParam("Nice")
+
+let closureReturn = { // Retornar valores em uma closure
+    (retornarei: String) -&gt; String in 
+    return "Eu retornarei com o parametro \(retornarei)!"
+}
+print(closureReturn("Juninho"))
+
+let driving = {
+    print("Eu estou dirigindo meu carro.")
+}
+func travel(action: () -&gt; Void){ // Passando uma closure em uma função.
+    print("Eu estou me preparando para sair. Espere um pouco!")
+    action()
+    print("Cheguei!")
+}
+travel(action: driving) // Modo padrão de chamar uma função passando uma closure
+travel{ // Trailling Closure. Só é válida quando o ultimo parametro de uma função é uma closure. Dentro das chaves, eu escrevo a closure que deverá ser utilizada na função.
+    print("Estou indo!")
+}
+
+
+func closureParam (action: (String) -&gt; Void){
+    print("I am getting ready to go.")
+    action("Londres")
+    print("Eu cheguei!")
+}
+
+closureParam{(place: String) in
+    print("Eu estou indo para \(place) no meu carro.")
+}
+closureParam("Voyage")
+
+func viajar(action: (String) -&gt; String){
+    print("Estou saindo..")
+    let description = action("Paris")
+    print(description)
+    print("Cheguei!")
+}
+
+viajar{ (place: String) -&gt; String in
+    return "V1. I am going to \(place) in my car."
+}
+
+    //Simplificando a chamada da closure acima:
+viajar { place -&gt; String in // Swift sabe que o parametro da closure em questão é uma string, então podemos remover o tipo da mesma
+    return "V2. I am going to \(place) in my car."
+}
+
+viajar {place in // Também podemos remover o tipo que deverá ser retornado
+    return "V3. I am going to \(place) in my car."
+}
+
+viajar { place in // Como só temos uma linha de código (que provavelmente é a que retorna um valor), podemos remover a palavra-chave 'return' 
+    "V4. I am going to \(place) in my car."
+}
+
+viajar{ // Nós podemos permitir que o Swift nomeie os parametros da closure automaticamente, com o simbolo de '$' seguido de um número (iniciado em 0). Assim removendo o parametro final e sintetizando a função em seu máximo.
+    "V5. I am going to \($0) in my car."
+}
+
+func multParamClosure(verb: (String, Int) -&gt; String){ // Closure de multiplos parametros
+    print("Eu estou escrevendo, aguarde!")
+    let description = verb("palpitando", 30)
+    print(description)
+    print("Vou morri.!")
+}
+multParamClosure{
+    "Meu coração está \($0) à \($1) por segundo!! Scrrrr"
+}
+
+func returClosure() -&gt; (String) -&gt; Void{
+    return{ // Retornar uma closure de uma função
+        print("Eu sou uma \($0) sendo retornada de uma função")
+    }
+}
+let retornada = returClosure() // Retornar essa closure dentro de uma variavel, e chama-la como uma função
+retornada("closure")
+let retornandoDiretamente = returClosure()("closure-2") // Retornando um valor de uma closure dentro de uma função diretamente.
+
+func captureClosure() -&gt; (String) -&gt; Void{
+    var counter = 1 // A variavel foi criada dentro de uma função, porém ela continua reutilizavel multiplas vezes para essa closure
+    return{ajuda in 
+        print("\(counter). Eu sou uma closure capturada de uma função, send \(ajuda)")
+        counter += 1
+    }
+}
+
+let capturedClosure = captureClosure()
+for i in 1 ... 3 {
+    capturedClosure("help!!!")
+}
+
+
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 3374}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>struct Sport{ 
+    var name: String // Propriedade dentro da struct
+}
+
+var tennis = Sport(name: "Tennisball")
+print(tennis.name)
+tennis.name = "Tenniszada"
+print(tennis.name)
+
+struct sport{
+    var name: String
+    var isOlympic: Bool
+    var olympicStatus: String { // Propriedade computada
+        if isOlympic{
+            return "\(name) is an Olympic Sport"
+        }else{
+            return "\(name) isn't an Olympic Sport"
+        }
+    }
+}
+
+let chess = sport(name: "Chesszada", isOlympic: false)
+print(chess.olympicStatus)
+
+struct progress {
+    var task: String
+    var amount: Int{
+        didSet{ // Propriedade observadora. O código vai executar certo comando sempre que 'amount' alterar.
+            print("\(task) is now \(amount)% complete")
+        }
+    }
+}
+// Já com a propriedade 'willSet', o comando é executado antes mesmo de certa propriedade se alterar
+var progresso = progress(task: "Loading Data", amount: 0) 
+progresso.amount = 30
+
+
+struct City{
+    var population: Int
+    func collectTaxes() -&gt; Int{ // Declaração de uma função dentro de uma struct é chamada 'método'
+        return population * 1000
+    }
+}
+
+
+let london = City(population: 9_000_000)
+print(london.collectTaxes()) // 9000000*1000
+
+
+struct Person{
+    var name: String
+    mutating func makeAnonymous(){ // Se uma 'struct' for construida sobre uma váriavel 'let', todas as suas propriedades também serão constantes. E, nesse caso, para você alterar uma propriedade dentro de um método, você precisa da palavra-chave 'mutating'
+        name = "Anonymous"
+    }
+}
+var pessoa = Person(name: "Ed")
+pessoa.makeAnonymous() // Esse método só poderá ser chamado em váriaveis
+print(pessoa.name)
+
+let string = "Be or not be, that's the question." // Strings são structs; com métodos e propriedades.
+print(string.count) // Conta o número de caracteres
+print(string.hasPrefix("Be")) // Retorna true/false se a string começar com a as letras especificas 
+print(string.uppercased()) // Maiúsculo
+print(string.sorted())// Torna a string em uma array de caracteres.
+
+var toys = ["woody"]
+print(toys.count) // Numero de items dentro de uma array
+toys.append("buzz") // Add novo item
+toys.firstIndex(of: "buzz") // Localiza o primeiro item dentro da array com a string passada. Caso não tenha, retorna NIL
+print(toys.sorted()) // Ordena em ordem alfabética
+toys.remove(at: 0) // Remove um item da array através do index.
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 2397}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

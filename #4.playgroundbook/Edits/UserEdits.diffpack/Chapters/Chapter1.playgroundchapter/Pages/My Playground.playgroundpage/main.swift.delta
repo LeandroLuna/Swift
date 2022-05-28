@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>struct User { // memberwise initializer: é peço que você atribua um valor para cada propriedade quando criada uma struct.
+    var username: String
+}
+var usuario = User(username: "LUNA") // É necessário que atribuamos um valor em sua inicialização.
+
+struct user{
+    var username: String
+    init(){ // Alterando o inicializador padrão. Todas as propriedades devem ter um valor antes do inicializador terminar, assim como não deve-se escrever funções antes do inicializador.
+        username = "Anonymous"
+        print("Creating a new user!")
+    }
+}
+var iniUser = user() // Agora não precisa de parametros inicialmente.
+iniUser.username = "blablabla"
+
+struct Person {
+    var name: String
+    init(name: String){
+        print("\(name) was born!")
+        self.name = name// Self.name referencia à a propriedade (Person.name) e 'name' referencia ao parametro (dentro de init). Self aponta para a instância da struct que está sendo usada.
+    }
+}
+var userr = Person(name: "YAHOOOO")
+userr
+
+struct FamilyTree {
+    init() {
+        print("Creating family tree!")
+    }
+}
+struct Pessoa{
+    var name: String
+    lazy var treeFamily = FamilyTree() // Swift só cria a propriedade quando é chamada pela primeira vez diretamente. Do contrario, a propriedade não será criada
+    init (name: String){
+        self.name = name
+    }
+}
+var edward = Pessoa(name: "Eduardo")
+edward.treeFamily // Só dessa maneira que a propriedade self.treeFamily será criada, e a mensagem exibida.
+
+struct Student{
+    var name: String
+    static var classSize = 0 // Declarando a propriedade 'Static', conseguiremos compartilha-la através de demais instâncias.
+    
+    init(name: String)
+    {
+        self.name = name
+        Student.classSize += 1 // Sempre que criamos uma instancia, a propriedade classSize incrementara em +1.
+    }
+}
+
+let alunoA = Student(name: "Leonardo")
+let alunoB = Student(name: "Leandro")
+print(Student.classSize) // Como a propriedade 'classSize' pertence a struct em si (Student) ao invés das instancias da struct, para lê-la precisamos chamar - genericamente - struct.property
+
+// Controle de Acesso
+struct Personal {
+    private var id: Int // Chamar 'Personal.id' fora da struct não funcionará. Assim sendo, impedindo as pessoas de lerem as propriedades diretamente.
+    // A palavra-chave 'public' faz o contrario
+    init(id: Int) {
+        self.id = id
+    }
+    func identify () -&gt; String{
+        return "My social security number is \(id)"
+    }// Somente métodos dentro de 'Person' podem ler a propriedade 'id'.
+}
+var privatePerson = Personal(id: 12345)
+print(privatePerson.identify()) // Acessar privatePerson.id não funciona
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 2641}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

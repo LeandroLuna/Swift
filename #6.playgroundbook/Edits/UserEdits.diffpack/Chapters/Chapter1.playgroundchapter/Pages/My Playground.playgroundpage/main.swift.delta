@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>//Protocolos
+protocol Identifiable{ // Protocolos são utilizados para descrever quais propriedades e métodos algo deve ter.
+    var id: String {get set} // Define que a string ID possa ser lida (get) ou escrita (set).
+}
+
+struct User: Identifiable { // Criando uma estrutura que esteja em conformidade com ela. Não podemos criar uma instância desse protocolo diretamente. Elá é somente uma descrição do que queremos.
+    var id: String
+}
+
+func displayID(thing: Identifiable){ // função que aceita como parametro um objeto (thing) com protocolo (Identifiable)
+    print("My ID is \(thing.id)!")
+}
+
+
+// Herança de protocolos (Protocol Inheritance)
+protocol Payable { // Requer tipos conforme necessario para implementar o método calculateWages()
+    func calculateWages() -&gt; Int
+}
+protocol NeedsTraining {
+    func study()
+}
+protocol HasVacation {
+    func takeVacation(days: Int)
+}
+
+protocol Employee: Payable, NeedsTraining, HasVacation{} // Agora podemos criar um protocolo que junta todos os demais. Assim, permitindo que criamos novos tipos com um único protocolo, ao invés de 3 separados individualmente.
+
+//Extensões
+extension Int { // Extensões permitem adicionarmos metodos à aqueles tipos já existentes, possibilitando-os a desempenhar novas funções que originalmente não era possivel.
+    func squared() -&gt; Int {
+        return self * self // Vlor do obj * Valor do obj
+    }
+}
+let number = 8
+number.squared()
+
+extension Int { // Swift não permite você adicionar propriedades-carregadas (stored properties) em extensões. Então devemos usar propriedades-computadas (computed properties).
+    var isEven: Bool{
+        return self % 2 == 0
+    }
+}
+number.isEven
+
+// Extensão de protocolos
+let pythons = ["Eric", "Graham", "John", "Michael", "Terry", "Terry"]
+let beatles = Set(["John", "Paul", "George", "Ringo"])
+
+
+extension Collection{ // Na extensão de protocolos, ao invés de extender um tipo especifico (ex. Int), estendemos todo o protocolo de maneira geral, para que todos os tipos em conformidado recebam suas alterações: Arrays/Sets respeitam um protocolo chamado 'Collection', então, no caso, estamos estendendo todo esse protocolo. 
+    func summarize(){  // Extensão para esse protocolo: método summarize()
+        print("There are \(count) of us:")
+        
+        for name in self{
+            print(name) // Exibe os nomes dentro do objeto.
+        }
+    }
+}
+pythons.summarize()
+beatles.summarize()
+
+// Programação orientada a protocolos (Protocol-Oriented Programming)
+
+protocol Identificavel { // Primeiro criamos um protocolo que qualquer define que qualquer tipo tenha um propriedade ID e um método identify()
+    var id: String { get set }
+    func identify() // Podemos fazer com que cada tipo em conformidade tivesse seu próprio método de identify()..
+}
+extension Identificavel {  
+    func identify() { // ..mas as extensões dos protocolos permitem fornecer um valor padrão
+        print("My ID is \(id).")
+    }
+}
+
+struct Usuario: Identificavel{ // Agora podemos criar um tipo conforme o protocolo Identificavel, e com isso terá o metodo identify() automaticamente
+    var id: String
+}
+
+let twostraw = Usuario(id: "Ratinho-nho")
+twostraw.identify()
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 3180}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

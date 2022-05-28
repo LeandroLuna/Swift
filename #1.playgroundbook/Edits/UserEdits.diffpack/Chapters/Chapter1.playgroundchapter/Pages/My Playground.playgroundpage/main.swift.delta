@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import UIKit
+
+var str = "Olá, playground!" // String
+str = "Tchau!"
+
+var idade = 19 // Int
+var populacao = 220_000_000 // O '_' é uma maneira de tornar números grandes mais legíveis, mas ele não exerce nenhuma influencia no resultado final.
+
+var multilineStr = """
+    Texto de
+    multiplas
+    linhas.
+    """ // Para escrever um texto de 'linhas multiplas', basta usarmos três pares de aspas duplas na abertura e fechamento da string.
+
+var multilineNoBreakStr = """
+    Texto de \
+    multiplas \
+    linhas.
+    """
+
+var double = 3.15 // Double | Números fracionados
+
+var boolean = true // Bool | true ou false
+
+var interpolatedStr = "Minha idade é \(idade)."
+
+var strOutOfStr = "Idades cadastradas: \(interpolatedStr)"
+
+let constraint = "Eu não posso mudar essa frase!" // Variáveis do tipo 'let' não podem ser alteradas (constantes); somente variáveis 'var' poderão ser alteradas.
+
+let time: String = "Corinthians" // Swift infere automaticamente o tipo da variável. 
+var year: Int = 1910 // Desta maneira, eu posso definir de maneira explicita o tipo da variável.
+
+
+let arr = [idade, populacao] // arrays são heterogeneas quanto ao tipo de variável.
+let infoTime = [[time], [year]] //  Se estiver usando 'type annotations', as variaveis devem ser escritas entre colchetes.
+
+let colors = Set(["red", "green", "blue"]) // itens não são armazenados com ordem especifica
+let colors2 = Set(["red", "yellow", "red"]) // itens não são duplicaveis
+
+var tuples = (first: "Taylor", last: "Swift") // não é possivel remover um item de uma tupla, nem o tipo.
+var fullName = "O nome da artista é \(tuples.0) \(tuples.last)." // tuplas podem ser acessadas por posições númericas ou pelos nomes dados.
+
+var dictionaries = [
+    "Taylor Swift" : 1.78,
+    "Ed Sheeran": 1.73 
+] // Heterogeneas
+
+dictionaries["Ed Sheeran"] // Os valores podem ser acessados através das chaves associadas a cada um
+dictionaries["random key"] // Quando acessamos uma chave que não existe, o valor retornado é NIL (nothing at all)
+
+var emptyCollection = [String: Int]() // Para criar dicionarios vazios basta colocar o tipo da chave e o tipo do valor associado a ele entre colchetes, e () vazios no final
+emptyCollection["ChaveNova"] = 1
+
+var emptyArr = [String]() // Array vazia
+
+var emptySet = Set&lt;Double&gt;() // Set vazio
+
+var scores = Dictionary&lt;String, Int&gt;() // Sintex padrão para criar coleções: seja arrays, dictionaries ou tuples
+
+enum Result{
+    case sucess
+    case failure
+} // Enumerações são uma maneira de definir grupos de valores relacionados
+let resultado = Result.sucess // Agora pode-se atribuir o valor chamando a variavel.case pretendido
+
+enum activityEnum {
+    case bored
+    case running(destination: String)
+    case talking(topic: String)
+    case singing(volume: Int)
+} // Criando associação de valores em enumerações
+let toTalk = activityEnum.talking(topic: "Soccer")
+
+enum Planet: Int{
+    case mercury = 1
+    case venus
+    case earth
+    case mars
+} // Atribuindo valores para enums. Por padrão, os cases começar com o valor 0 e vão incrementando de 1 em 1
+let earth = Planet(rawValue: 3)
+
+let firstNum = 12
+let secondNum = 3
+
+let sum = firstNum + secondNum // Operadores aritmeticos
+let diff = firstNum - secondNum
+let mult = firstNum * secondNum
+let div = firstNum / secondNum
+let remain = firstNum % secondNum
+
+let verbo = "comer"
+let fullPhrase = "Eu vou " + verbo // Concatenação
+
+let arr1 = ["John", "Paul"]
+let arr2 = ["George", "Ringo"]
+let joinArr = arr1 + arr2 // Concatenação de arrays
+
+var newNum = 10
+newNum /= secondNum // Operador composto
+
+var randomPhrase = "Testando operadores "
+randomPhrase += "compostos"
+
+firstNum == secondNum // Comparadores logicos
+firstNum != secondNum
+firstNum &lt; secondNum
+firstNum &gt;= secondNum
+"Taylor" &lt; "Swift"
+
+if firstNum != secondNum { // Condições
+    print("Os números são diferentes!")
+}
+
+if firstNum + secondNum == 14 {
+    print("O resultado é 14")
+} else if firstNum + secondNum == 15 {
+    print("O resultado é 15")
+} else {
+    print("O resultado é qualquer outro")
+}
+
+let age1 = 12
+let age2 = 21
+
+if age1 &gt; 18 &amp;&amp; age2 &gt; 18 { // Operadores combinatórios
+    print("Ambas as idades são maior de 18!")
+} 
+
+if age1 &gt; 18 || age2 &gt; 18 {
+    print("Pelo menos uma das idades é maior de 18!")
+} 
+
+print(age1 == age2 ? "As idades são iguais" : "As idades são diferentes") // Operador ternario. Ele checa a primeira condicional: se verdadeiro, retorna o primeiro valor pós '?'; caso contrario, retorna o segundo valor.
+
+var semana = "Sábado"
+
+switch semana {
+case "Sábado":
+    print("É final de semana: " + semana)
+case "Domingo":
+    print("É final de semana: " + semana)
+default:
+    print("É dia de trabalhar! :c")
+}
+
+semana = "Domingo"
+switch semana {
+case "Sábado":
+    print("É final de semana: " + semana)
+case "Domingo":
+    print("É final de semana: " + semana)
+    fallthrough // Continua a execução até o próximo case
+default:
+    print("Tenha um ótimo dia!")
+}
+
+let rangeOp = 50
+switch rangeOp {
+case 0..&lt;50: // Range de 0 até 49. Não inclui o 50.
+    print("Você falhou!")
+case 50...85: // Range de 50 até 85
+    print("Passou passando")
+default:
+    print("Você foi muito bem!")
+}
+
+print("////////////////")
+let forLoop = 1...10
+for number in forLoop{
+    print("Número é \(number)")
+}
+
+print("////////////////")
+let albums = ["Red", "1989", "Reputation"]
+for album in albums{
+    print("\(album) está disponível no Spotify!")
+}
+print("////////////////")
+var initialNumber = 1
+for _ in 1...5{ // Se não colocarmos um valor para a constante no laço for, basta usarmos o '_'
+    print(initialNumber)
+    initialNumber += 2
+}
+
+print("////////////////")
+initialNumber = 2
+while initialNumber &lt;= 20 {
+    print(initialNumber)
+    initialNumber *= 2
+}
+
+print("////////////////")
+initialNumber = 0
+repeat { // Como a condição vem no final, o loop será executado pelo menos 1x; Enquanto no while, o loop checa a condição antes da primeira execução
+    print("O número é: \(initialNumber)")
+    initialNumber += 5
+} while initialNumber &lt;= 25
+
+print("////////////////")
+var countDown = 10
+while countDown &gt;= 0 {
+    print(countDown)
+    countDown -= 1
+    
+    if(countDown == 3){
+        print("VAMOS LOGO!")
+        break // O looping é interrompido
+    }
+}
+
+print("////////////////")
+for i in 1...2{ // Loops encadeados
+    for j in 1...5{
+        print("\(i*j) é produto de \(i) * \(j)")
+    }
+}
+
+print("////////////////")
+outerLoop: for i in 1...4{ // O nome do rotulo é escolhido por mim
+    for j in 1...5{
+        print("\(i*j) é produto de \(i) * \(j)")
+        
+        if(i*j == 15){
+            print("CHEGA!!!")
+            break outerLoop // O loop interno E externo será interrompido
+        }
+    }
+}
+
+print("////////////////")
+for i in 1...10{
+    if i%2 == 1{
+        continue // Pula a iteração atual e avança para a proxima, sem sair do looping
+    }
+    print("Numero par: \(i)")
+}
+
+print("////////////////")
+var contador = 0
+while true{ // Loops infinitos
+    print("")
+    contador += 1
+    
+    if contador == 5{
+        break
+    }
+}
+
+func printFunc(){
+    let message = "Olá, funções!!"
+    print(message)
+}
+printFunc()
+
+func paramFunc(numero: Int){ // Nome do parametro seguido do tipo
+    print(numero*numero)
+}
+paramFunc(numero: 10)
+
+func returnFunc (numero: Int) -&gt; Int { // Para indicar o tipo da variavel a ser retornada, basta colocarmos um '-&gt;' seguida do tipo 
+    return numero*10
+}
+let returnedResult = returnFunc(numero: 20)
+print(returnedResult)
+
+func sayHello(to name: String){ // Para rotular um parametro, devemos colocar o nome que será usado externamente (ao chamar a função), seguido do nome que será usada internamente (dentro da função)
+    print("Hello, \(name)!")
+}
+sayHello(to: "Taylor")
+
+func omittingParam (_ person: String){ // Para omitirmos um parametro na chamada de uma função, basta colocarmos um '_'
+    print("Adeus, \(person)!")
+}
+omittingParam("Swift")
+
+func defaultParam (_ person: String, nicely: Bool = true){ // Para escrevemos valores padrões para argumentos, basta inserirmos o "=" seguido do valor que querermos 
+    if nicely == true{
+        print("Olááá, \(person)!")
+    }else{
+        print("Oh oh, é a \(person) novamente..")
+    }
+} 
+defaultParam("Zeca Urubu")
+defaultParam("Jorge urubu", nicely: false)
+
+func multipleParam(numbers: Int...){ // Para se ter uma função de multiplos parametros, basta colocarmos '...' depois do tipo da variavel
+    for number in numbers{ // O Swift converte o parametro de multiplos valores em uma array daquele tipo automaticamente
+        print("\(number) ao quadrado é \(number*number)")
+    }
+}
+multipleParam(numbers: 1, 2, 3, 4, 5) // Separar os argumentos por virgula
+
+enum PasswordError: Error{ // Erros em funções: Primeiramente devemos criar um enum associado aos erros que podem acontecer, do tipo Error
+    case obvious
+}
+func checkError(_ password: String) throws -&gt; Bool { // Usamos, então, a palavra-chave 'throws' antes da função retornar quaisquer valores
+    if password == "password"{
+        throw PasswordError.obvious // E por fim a palavra-chave 'throw' associado ao enumerador, que definimos antes com o erro.
+    }
+    return true
+}
+// O Swift não deixará rodarmos funções do tipo error-throwing por acidente. E para resolver isso, precisamos de 3 novas palavra-chaves
+do{ // Inicia um secção do codigo que pode ter problemas
+    try checkError("senha") // É usada antes de qualquer função que possa ocorrer erros
+    print("Essa senha é permitida!")
+    } catch{ // Permite manipularmos esses erros
+        print("Você não pode usar essa senha!")
+}
+
+func inOutParam (number: inout Int){ // Para escrevermos funções com parametros de entrada/saida, basta colocarmos a palavra-chave 'inout' antes do tipo da variavel
+    number *= 5
+}
+
+var myNumber = 10
+inOutParam(number: &amp;myNumber) // Para esse parametro ser usado como entrada e saida, basta colocarmos o simbolo '&amp;' - obs.: esse parametro de entrada não pode ser constante, pois ele vai sofrer alteração.
+print(myNumber)
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 9961}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

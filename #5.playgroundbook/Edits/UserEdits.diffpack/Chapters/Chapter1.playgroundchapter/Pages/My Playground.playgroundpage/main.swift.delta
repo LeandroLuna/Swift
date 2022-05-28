@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>class Dog{ // A primeira diferença entre struct e classes é que a class não tem inicializador por padrão. Significa que se a class tiver propriedades, você deve sempre criar um inicializador
+    var name: String
+    var breed: String
+    
+    init(name: String, breed: String){ // Inicializador
+        self.name = name
+        self.breed = breed
+    }
+}
+let poppy = Dog(name: "Poppy", breed: "Poodle") // Criar uma instancia de classe, é a mesma maneira que uma struct.
+
+class Poodle: Dog{ // A segunda diferença: é possivel criar uma class com as propriedades e incializadores de outra class: Class Inherit. A classe que herda as propriedades é a classe filha, e a que herdou as propriedades é a classe pai. 
+    init(name: String){
+        super.init(name: name, breed: "Poodle") // Criando um inicializador próprio para a classe filho. Dessa, a propriedade 'name' será herdada da classe pai (init(name: String)), e 'breed' sempre será Poodle (super.init(breed: "Poodle")).
+    }
+}
+
+class dog{
+    func makeNoise(){
+        print("Woof!")
+    }
+}
+class poodle: dog{
+    override func makeNoise() { // Terceira diferença: é possivel sobrepor um método na class filho, com a palavra-chave 'override func'
+        print("Yip!")
+    }
+}
+let puppie = poodle()
+puppie.makeNoise()
+
+final class Cat { // A palavra chave 'final' proibe que as classes que herdarem a essa class não possam alterar nenhuma propriedade (override) e método da class pai. A class filha terá as mesmas propriedades da class pai. 
+    var name: String
+    var breed: String
+    
+    init(name: String, breed: String) {
+        self.name = name
+        self.breed = breed
+    }
+}
+
+class Singer{
+    var name = "Taylor Swift"
+}
+
+var cantora = Singer()
+print(cantora.name)
+
+var cantoraCopia = cantora // A terceira diferença é que as copia de instâncias do tipo class apontam para o mesmo endereço de memória (enquanto em structs, a instancia original e a copias são copias diferentes). Ou seja, quando copiamos uma instância para outra instância, e mudamos uma das propriedades, ambas as instancias mudarão.
+cantoraCopia.name = "Justin Bieber"
+print(cantoraCopia.name)
+print("O novo nome da instancia cantora.name: \(cantora.name)")
+
+class Person {
+    var name = "John Doe"
+    
+    init(){
+        print("\(name) is alive!")
+    }
+    
+    deinit{ // A quarta diferença é que classes podem ter deinicializadores - código que são executados sempre que uma instancia de class for destruida.
+        print("\(name) is not alive anymore!")
+    }
+    func Greetings(){
+        print("Hello, I am \(name)")
+    }
+}
+
+for i in 1...3{ // Sempre que o loop rodar, uma nova instancia será criada e destruida (ativando o deinit).
+    print("\(i).")
+    let person = Person()
+    person.Greetings()
+}
+
+class Time{
+    var name = "Corinthians"
+}
+
+let team = Time() // A última diferença é que uma class constante com uma propriedade váriavel é possivel ser alterada sem a palavra-chave 'mutating' - como em uma struct. Caso não queiramos alterar o valor da propriedade em si, devemos cria-la do tipo constante (let).
+team.name = "Timão!"
+print(team.name)
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 3111}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

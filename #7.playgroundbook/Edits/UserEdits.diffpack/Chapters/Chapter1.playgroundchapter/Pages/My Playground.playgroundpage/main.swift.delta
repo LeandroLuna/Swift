@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// Handling missing data: OPTIONALS
+var age: Int? = nil // Inteiro Optional. Recebe um valor nulo.
+
+
+//Unwrapping Optionals
+var name: String? = nil
+if let unwrapped = name{ // Se 'name' tiver uma string, ela será colocada dentro da variavel 'unwrapped' como uma string normal. 
+    print("\(unwrapped.count) letters")
+}else{ // Caso 'name' esteja vazia, o código dentro de 'else' irá rodar
+    print("Missing name.")
+}
+
+
+//Unwrapping with guard
+func greet(_ name: String?){ // Aceita uma string optional como parametro
+    guard let unwrapped = name else{ // Tenta desdobrar a string. Se não conseguir, a função exibirá uma mensagem e fechará a função. Permitindo assim, economizar recursos de memória e mitigando os erros logo no começo.
+        print("You didnt provide a name!")
+        return
+    }
+    print("Hello, \(unwrapped)") // Como foi utilizada o 'guard let', a string 'unwrapped' continuará disponivel para utilizar mesmo após o fim de 'guard'.
+}
+
+// Force Unwrapping
+let str = "5"
+let num = Int(str)! // Forçando a conversão de optionals. Optional Type &gt; Non-Optional Type. Caso não seja possivel ser feita a conversão, nesse caso, para inteiro, o código chasharia.
+
+
+// Implicitly Unwrapped Optionals
+let idade: Int! = nil // Unwrapped implicito existe pois algumas vezes as variaveis vão iniciar sendo nulas, mas sempre terão valores antes de você usa-las. Eles funcionam como se já tivessem desdobrados. Caso eu usasse como um valor nulo, o codigo iria chashar.  
+
+
+// Nil Coalescing
+func username(for id: Int) -&gt; String?{ // O operador de Nil Coalescing desdobra uma optional e retorna um valor armazenando-o como se tivesse um originalmente.
+    if id == 1{ 
+        return "Taylor do Swift"
+    }else{ 
+        return nil
+    }
+}
+
+let user = username(for: 15) ?? "Anonymous" // Se caso não tenha um valor dentro, se o optional tiver NIL, um valor padrão será usado em seu lugar. No caso, o valor padrão será 'Anonymous'
+
+//Optional Chaining
+let nomes = ["JJ", "Paul", "George", "Ringo"]
+let beatle = nomes.first?.uppercased() // Retorna o primeiro valor da array (John) em letra maiscúla. Nesse caso, se o primeiro valor retornar NIL, o Swift não tentará mais transformar a palavra para letra maiscula, e armazenara NIL imediatamente.
+
+//Optional Try
+enum PasswordError: Error {
+    case obvious
+}
+
+func checkPassword(_ password: String) throws -&gt; Bool {
+    if password == "password" {
+        throw PasswordError.obvious
+    }
+    
+    return true
+}
+
+if let result = try? checkPassword("password"){ // Passa uma função dentro uma outra função (try) e retorna um optional. Se a função gerar um erro, o resultado retornado será NIL; do contrário, o valor retornado vai ser um optional wrapped
+    print("Result was \(result)")
+}else{
+    print("Oh, oh!")
+}
+
+try! checkPassword("sekrit") // A outra alternativa é usar try! quando você tem certeza que a função não irá falhar. Se uma função tiver um erro, o código irá chashar. 
+print("Ok!")
+
+//Failable Initializers
+struct Person {
+    var id: String
+    
+    init?(id: String) { // O valor retornado será um optional do seu devido tipo, para ser desdobrado futuramente. 
+        if id.count == 9 { // Retorna nulo se alguma coisa der errado, ou se 'ID' for diferente de uma String de 9 caracteres. 
+            self.id = id
+        } else {
+            return nil
+        }
+    }
+}
+
+//Typecasting
+class Animal { }
+class Fish: Animal { }
+
+class Dog: Animal {
+    func makeNoise() {
+        print("Woof!")
+    }
+}
+
+let pets = [Fish(), Dog(), Fish(), Dog()] // Fish e Dog são classes herdadades da classe Animal. Assim sendo, podemos criar uma array 'pets' da classe herdade Animal
+
+for pet in pets {
+    if let dog = pet as? Dog { // as? retorna um optional: retorna um tipo convertido para cada uma dos 'pet' que tiverem o objeto 'Dog', e posteriormente executa o método makeNoise(); ou NIL se esse typecast falhar.
+        dog.makeNoise()
+    }
+}
+
+
+
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 3921}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
